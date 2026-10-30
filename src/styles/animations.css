@@ -1,0 +1,156 @@
+/* ============================================================
+   Keyframes shared across components
+   ============================================================ */
+
+/* Ambient hearts drifting bottom -> top */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--peak-opacity, 0.9);
+  }
+  90% {
+    opacity: var(--peak-opacity, 0.9);
+  }
+  100% {
+    transform: translateY(calc(-100vh - 20%)) translateX(var(--drift, 20px))
+      rotate(var(--spin, 40deg));
+    opacity: 0;
+  }
+}
+
+/* Petals falling top -> bottom with a gentle sway */
+@keyframes petalFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--peak-opacity, 0.85);
+  }
+  88% {
+    opacity: var(--peak-opacity, 0.85);
+  }
+  100% {
+    transform: translateY(calc(100vh + 20%)) translateX(var(--drift, 40px))
+      rotate(var(--spin, 220deg));
+    opacity: 0;
+  }
+}
+
+/* Heartbeat pulse for the big CSS heart */
+@keyframes heartPulse {
+  0%,
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  15% {
+    transform: rotate(-45deg) scale(1.13);
+  }
+  30% {
+    transform: rotate(-45deg) scale(1);
+  }
+  45% {
+    transform: rotate(-45deg) scale(1.08);
+  }
+  60% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 40px 6px rgba(255, 111, 145, 0.5),
+      0 0 90px 20px rgba(233, 30, 99, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 60px 14px rgba(255, 111, 145, 0.7),
+      0 0 130px 34px rgba(233, 30, 99, 0.35);
+  }
+}
+
+/* Confetti falling */
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotateZ(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(115vh) rotateZ(720deg);
+    opacity: 0.9;
+  }
+}
+
+/* Heart burst pieces flying outward */
+@keyframes burstFly {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--bx), var(--by)) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Soft float for emphasis emoji */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Typewriter caret blink */
+@keyframes caretBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Utility animation classes */
+.bob {
+  animation: bob 2.6s ease-in-out infinite;
+}
+
+.typewriter-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--pink-600);
+  animation: caretBlink 0.9s step-end infinite;
+}
+
+/* ============================================================
+   Reduced motion: calm everything down
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Hide purely-decorative moving layers entirely */
+  .particle-layer,
+  .confetti,
+  .petal,
+  .particle {
+    display: none !important;
+  }
+}
